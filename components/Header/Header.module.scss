@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+
+.header {
+    color: $color-test-red;
+
+    &__p {
+        border: 1px solid $color-test-red;
+    }
+}
