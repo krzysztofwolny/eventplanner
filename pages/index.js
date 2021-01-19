@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './index.module.scss';
 
 import Header from '../components/Header/Header';
 
 const MainPage = () => {
+    const user = null;
     return(
-        <div className={styles.container}>
-            <Header />
+        <div className="container">
+            <Header user={user} />
             Main Page
         </div>
     );
