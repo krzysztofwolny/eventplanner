@@ -1,9 +1,10 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { UserContext } from '../src/providers/UserProvider';
 import Header from '../components/Header/Header';
 
 const MainPage = () => {
-    const user = null;
+    const user = useContext(UserContext);
+    console.log(user)
     return(
         <div className="container">
             <Header user={user} />

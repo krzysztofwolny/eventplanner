@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Link from "next/link";
+import { auth, generateUserDocument } from '../../src/firebase';
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
@@ -7,8 +8,19 @@ const SignUp = () => {
     const [displayName, setDisplayName] = useState("");
     const [error, setError] = useState(null);
 
-    const createUserWithEmailAndPasswordHandler = (event, email, password) => {
+    const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
         event.preventDefault();
+
+        try{
+            const {user} = await auth.createUserWithEmailAndPassword(email, password);
+            generateUserDocument(user, {displayName});
+            console.log('założyłeś konto!');
+          }
+          catch(error){
+            setError('Error Signing up with email and password');
+            console.log('nie masz konta!');
+          }
+
         setEmail("");
         setPassword("");
         setDisplayName("");
@@ -76,7 +88,7 @@ const SignUp = () => {
                 </button>
             </form>
             <p>or</p>
-            <button>
+            <button  onClick={() => signInWithGoogle()}>
                 Sign In with Google
             </button>
             <p>

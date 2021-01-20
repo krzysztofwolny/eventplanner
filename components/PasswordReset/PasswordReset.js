@@ -16,6 +16,15 @@ const PasswordReset = () => {
 
     const sendResetEmail = event => {
         event.preventDefault();
+        auth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+        setEmailHasBeenSent(true);
+        setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
+      })
+      .catch(() => {
+        setError("Error resetting password");
+      });
     };
 
     return(
@@ -46,7 +55,7 @@ const PasswordReset = () => {
                         placeholder="Input your email"
                         onChange={onChangeHandler}
                     />
-                    <button>
+                    <button onClick={() => sendResetEmail()}>
                         Send me a reset link
                     </button>
                 </form>
