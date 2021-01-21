@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Router from 'next/router';
 import Link from 'next/link';
 import { auth, signInWithGoogle } from '../../src/firebase';
 
@@ -9,7 +10,11 @@ const SignIn = () => {
 
     const signInWithEmailAndPasswordHandler = (event,email, password) => {
             event.preventDefault();
-            auth.signInWithEmailAndPassword(email, password).catch(error => {
+            auth.signInWithEmailAndPassword(email, password)
+            .then(
+              Router.push("/UserHome")
+            )
+            .catch(error => {
               setError("Error signing in with password and email!");
               console.error("Error signing in with password and email", error);
             });
@@ -60,9 +65,9 @@ const SignIn = () => {
         <button onClick={() => signInWithGoogle()}>
           Sign in with Google
         </button>
-        <p className="text-center my-3">
+        <p>
           Don't have an account?{" "}
-          <Link href="#">
+          <Link href="/SignUp">
             Sign up here
           </Link>{" "}
           <br />{" "}

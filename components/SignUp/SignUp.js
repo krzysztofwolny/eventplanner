@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Link from "next/link";
-import { auth, generateUserDocument } from '../../src/firebase';
+import { auth, generateUserDocument, signInWithGoogle } from '../../src/firebase';
 
 const SignUp = () => {
     const [email, setEmail] = useState("");

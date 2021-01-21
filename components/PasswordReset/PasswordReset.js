@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { auth } from '../../src/firebase';
 
 const PasswordReset = () => {
 
@@ -21,9 +22,11 @@ const PasswordReset = () => {
         .then(() => {
         setEmailHasBeenSent(true);
         setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
+        console.log('sukcess!')
       })
-      .catch(() => {
+      .catch((error) => {
         setError("Error resetting password");
+        console.log(error);
       });
     };
 

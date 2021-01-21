@@ -5,11 +5,7 @@ export const UserContext = createContext({ user: null });
 
 class UserProvider extends Component {
     state = {
-      user: {
-          displayName: null,
-          email: null,
-          photoURL: null,
-      }
+      user: null
     };
   
     componentDidMount = async () => {
@@ -18,6 +14,7 @@ class UserProvider extends Component {
           this.setState({ user });
         });
       };
+
     render() {
       return (
         <UserContext.Provider value={this.state.user}>

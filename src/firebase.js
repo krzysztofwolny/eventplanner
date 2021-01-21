@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import Router from 'next/router';
 
 const firebaseConfig = {
     apiKey: "AIzaSyC5VyGlkK6jJzriVO4JBR9DGmW3M5sP-us",
@@ -20,14 +21,13 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const signInWithGoogle = () => {
-  auth.signInWithPopup(provider);
+  auth.signInWithPopup(provider).then(Router.push('/UserHome'));
 };
 
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
-  console.log('nie ma usera');
   if (!snapshot.exists) {
     const { email, displayName, photoURL } = user;
     try {
