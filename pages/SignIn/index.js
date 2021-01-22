@@ -3,10 +3,9 @@ import Header from '../../components/Header/Header';
 import SignIn from '../../components/SignIn/SignIn';
 
 const SignInPage = () => {
-    const user = null;
     return(
         <div className="container">
-            <Header user={user} />
+            <Header />
             <SignIn />
         </div>
     );

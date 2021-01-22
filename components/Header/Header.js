@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import styles from './Header.module.scss';
+import { UserContext } from '../../src/providers/UserProvider';
+import Logo from './Logo/Logo';
 import SignInButton from './SignInButton/SignInButton';
-import SignUpButton from './SignUpButton/SignUpButton';
+import UserMenu from './UserMenu/UserMenu';
 
-const Header = ({ user }) => {
-    const signUpOrIn = user ? <SignInButton goWhere="/SignIn" /> : <SignUpButton goWhere="/SignUp"/>;
+const Header = () => {
+    const user = useContext(UserContext);
+    const signUpOrMenu = user ? <UserMenu /> : <SignInButton />;
     return(
         <section className={styles.header}>
-            <p className={styles.header__p}>Header</p>
-            <div>{signUpOrIn}</div>
+            <Logo />
+            <div>{signUpOrMenu}</div>
         </section>
     );
 }

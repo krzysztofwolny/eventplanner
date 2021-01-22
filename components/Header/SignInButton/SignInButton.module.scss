@@ -1,0 +1,48 @@
+@import '../../../styles/variables.scss';
+
+.signin {
+    margin: 2rem;
+    color: white;
+
+    display: flex;
+
+
+    &__button {
+        display: inline-block;
+        font-size: 1.5rem;
+        margin-right: 2rem;
+        width: 75px;
+        height: 45px;
+        border-radius: 15px;
+
+        &_in {
+            background-color: $color-primary;
+            border: 2px solid $color-primary;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .4s;
+
+            &:hover {
+                background-color: transparent;
+                color: $color-primary;
+            }
+        }
+
+        &_up {
+            border: 2px solid $color-primary;
+            color: $color-primary;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .4s;
+
+            &:hover {
+                background-color: $color-primary;
+                color: white;
+            }
+        }
+    }
+}

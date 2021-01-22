@@ -3,6 +3,8 @@ import Router from 'next/router';
 import Link from 'next/link';
 import { auth, signInWithGoogle } from '../../src/firebase';
 
+import styles from './SignIn.module.scss';
+
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -32,50 +34,50 @@ const SignIn = () => {
     };
 
     return(
-        <React.Fragment>
-        <h1>Sign In Page</h1>
-        <form>
-          <label htmlFor="userEmail">
-            Email:
-          </label>
-          <input
-            type="email"
-            name="userEmail"
-            value = {email}
-            placeholder="E.g: faruq123@gmail.com"
-            id="userEmail"
-            onChange = {(event) => onChangeHandler(event)}
-          />
-          <label htmlFor="userPassword">
-            Password:
-          </label>
-          <input
-            type="password"
-            name="userPassword"
-            value = {password}
-            placeholder="Your Password"
-            id="userPassword"
-            onChange = {(event) => onChangeHandler(event)}
-          />
-          <button onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
-            Sign in
+        <div className={styles.signin}>
+          <h1>Sign In Page</h1>
+          <form>
+            <label htmlFor="userEmail">
+              Email:
+            </label>
+            <input
+              type="email"
+              name="userEmail"
+              value = {email}
+              placeholder="E.g: faruq123@gmail.com"
+              id="userEmail"
+              onChange = {(event) => onChangeHandler(event)}
+            />
+            <label htmlFor="userPassword">
+              Password:
+            </label>
+            <input
+              type="password"
+              name="userPassword"
+              value = {password}
+              placeholder="Your Password"
+              id="userPassword"
+              onChange = {(event) => onChangeHandler(event)}
+            />
+            <button onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+              Sign in
+            </button>
+          </form>
+          <p>or</p>
+          <button onClick={() => signInWithGoogle()}>
+            Sign in with Google
           </button>
-        </form>
-        <p>or</p>
-        <button onClick={() => signInWithGoogle()}>
-          Sign in with Google
-        </button>
-        <p>
-          Don't have an account?{" "}
-          <Link href="/SignUp">
-            Sign up here
-          </Link>{" "}
-          <br />{" "}
-          <Link href="/ResetPassword">
-            Forgot Password?
-          </Link>
-        </p>
-      </React.Fragment>
+          <p>
+            Don't have an account?{" "}
+            <Link href="/SignUp">
+              Sign up here
+            </Link>{" "}
+            <br />{" "}
+            <Link href="/ResetPassword">
+              Forgot Password?
+            </Link>
+          </p>
+        </div>
     );
 }
 
