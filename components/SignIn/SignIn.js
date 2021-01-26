@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import { auth, signInWithGoogle } from '../../src/firebase';
+
+import Button from '../../UIelements/Button/Button';
 
 import styles from './SignIn.module.scss';
 
@@ -34,13 +36,15 @@ const SignIn = () => {
     };
 
     return(
-        <div className={styles.signin}>
-          <h1>Sign In Page</h1>
-          <form>
-            <label htmlFor="userEmail">
+      <div className={styles.signUp__mainWraper}>
+        <div className={styles.signUp}>
+          <h1 className={styles.signUp__mainLabel}>Sign In</h1>
+          <form className={styles.signUp__form}>
+            <label htmlFor="userEmail" className={styles.signUp__inputLabel}>
               Email:
             </label>
             <input
+              className={styles.signUp__input}
               type="email"
               name="userEmail"
               value = {email}
@@ -48,10 +52,11 @@ const SignIn = () => {
               id="userEmail"
               onChange = {(event) => onChangeHandler(event)}
             />
-            <label htmlFor="userPassword">
+            <label htmlFor="userPassword" className={styles.signUp__inputLabel}>
               Password:
             </label>
             <input
+              className={styles.signUp__input}
               type="password"
               name="userPassword"
               value = {password}
@@ -59,25 +64,31 @@ const SignIn = () => {
               id="userPassword"
               onChange = {(event) => onChangeHandler(event)}
             />
-            <button onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+            <Button 
+              clickAction={(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}
+            >
               Sign in
-            </button>
+            </Button>
           </form>
-          <p>or</p>
-          <button onClick={() => signInWithGoogle()}>
+          <p className={styles.signUp__signsSecondary}>or</p>
+          <Button 
+            clickAction={() => signInWithGoogle()}
+            buttonType="button__google"
+          >
             Sign in with Google
-          </button>
-          <p>
-            Don't have an account?{" "}
+          </Button>
+          <p className={styles.signUp__signsSecondary1}>
             <Link href="/SignUp">
-              Sign up here
+              Don't have an account? Sign up here
             </Link>{" "}
-            <br />{" "}
+          </p>
+          <p className={styles.signUp__signsSecondary1}>
             <Link href="/ResetPassword">
               Forgot Password?
             </Link>
           </p>
         </div>
+      </div>
     );
 }
 

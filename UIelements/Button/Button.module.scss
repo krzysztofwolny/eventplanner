@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.button {
+    width: 13rem;
+    height: 5rem;
+    margin: 2rem;
+    font-size: 1.5rem;
+    color: $color-primary;
+    background-color: white;
+    border-radius: 1rem;
+    border: 2px solid $color-primary;
+    transition: all .2s;
+
+    &:hover {
+        color: white;
+        background-color: $color-primary;
+    }
+
+    &:active {
+        transform: translateY(2px) scale(.98);
+        box-shadow: 1px 1px 15px 2px $color-primary-second;
+    }
+
+    &__google {
+        color: white;
+        border: none;
+        background-color: $color-google-red;
+        transition: all .3s;
+
+        &:hover {
+            background-color: red;
+        }
+    }
+}

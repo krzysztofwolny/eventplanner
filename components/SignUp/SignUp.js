@@ -1,6 +1,9 @@
 import React, {useState} from "react";
 import Link from "next/link";
 import { auth, generateUserDocument, signInWithGoogle } from '../../src/firebase';
+import styles from './SignUp.module.scss';
+
+import Button from '../../UIelements/Button/Button';
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
@@ -38,67 +41,71 @@ const SignUp = () => {
       };
 
     return(
-        <div>
-            <h1>Sign Up</h1>
-            <div>
-                {error !== null && (
-                    <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
-                    {error}
-                    </div>
-                )}
-            <form>
-                <label htmlFor="displayName">
-                    Display Name:
-                </label>
-                 <input
-                    type="text"
-                    name="displayName"
-                    value={displayName}
-                    placeholder="E.g: Faruq"
-                    id="displayName"
-                    onChange={event => onChangeHandler(event)}
-                />
-                <label htmlFor="userEmail" className="block">
-                    Email:
-                </label>
-                <input
-                    type="email"
-                    name="userEmail"
-                    value={email}
-                    placeholder="E.g: faruq123@gmail.com"
-                    id="userEmail"
-                    onChange={event => onChangeHandler(event)}
-                />
-                <label htmlFor="userPassword">
-                    Password:
-                 </label>
-                <input
-                    type="password"
-                    name="userPassword"
-                    value={password}
-                    placeholder="Your Password"
-                    id="userPassword"
-                    onChange={event => onChangeHandler(event)}
-                />
-                <button
-                    onClick={event => {
-                    createUserWithEmailAndPasswordHandler(event, email, password);
-                    }}>
-                    Sign up
-                </button>
-            </form>
-            <p>or</p>
-            <button  onClick={() => signInWithGoogle()}>
-                Sign In with Google
-            </button>
-            <p>
-                Already have an account?{" "}
-            <Link href="/SignIn">
-                 Sign in here
-            </Link>
-        </p>
-      </div>
-    </div>
+        <div className={styles.signUp__mainWraper}>
+            <div className={styles.signUp}>
+                <h1 className={styles.signUp__mainLabel}>Sign Up</h1>
+                
+                    {error !== null && (<div>{error}</div>)}
+                    <form className={styles.signUp__form}>
+                        <label htmlFor="displayName" className={styles.signUp__inputLabel}>
+                            Display Name:
+                        </label>
+                        <input
+                            className={styles.signUp__input}
+                            type="text"
+                            name="displayName"
+                            value={displayName}
+                            placeholder="E.g: Faruq"
+                            id="displayName"
+                            onChange={event => onChangeHandler(event)}
+                        />
+                        <label htmlFor="userEmail" className={styles.signUp__inputLabel}>
+                            Email:
+                        </label>
+                        <input
+                            className={styles.signUp__input}
+                            type="email"
+                            name="userEmail"
+                            value={email}
+                            placeholder="E.g: faruq123@gmail.com"
+                            id="userEmail"
+                            onChange={event => onChangeHandler(event)}
+                        />
+                        <label htmlFor="userPassword" className={styles.signUp__inputLabel}>
+                            Password:
+                        </label>
+                        <input
+                            className={styles.signUp__input}
+                            type="password"
+                            name="userPassword"
+                            value={password}
+                            placeholder="Your Password"
+                            id="userPassword"
+                            onChange={event => onChangeHandler(event)}
+                        />
+                        <Button
+                            clickAction={event => {
+                            createUserWithEmailAndPasswordHandler(event, email, password);
+                            }}>
+                            Sign up
+                        </Button>
+                    </form>
+                    <p className={styles.signUp__signsSecondary}>or</p>
+                    <Button 
+                        clickAction={() => signInWithGoogle()}
+                        buttonType="button__google"
+                    >
+                        Sign In with Google
+                    </Button>
+                    <p className={styles.signUp__signsSecondary1}>
+                        <Link href="/SignIn">
+                            Already have an account?                     
+                            Sign in here
+                        </Link>
+                    </p>
+                
+            </div>
+        </div>
     );
 }
 
