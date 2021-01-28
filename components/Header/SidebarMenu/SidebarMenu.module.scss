@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/animations.scss';
+
+.sidebar {
+    width: 20rem;
+    height: calc(100vh - 8rem);
+    box-shadow: 10px 10px 10px 10px $color-darker-grey;
+    position: absolute;
+    right: 0;
+    top: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__in {
+        animation: sidebarEnter .5s ease-out;
+    }
+
+    &__out {
+        animation: sidebarOut .5s ease-out; 
+    }
+
+    &__logo {
+        margin: 2rem auto;
+        width: 55%;
+    }
+}

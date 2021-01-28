@@ -1,0 +1,23 @@
+@keyframes sidebarEnter {
+    0% {
+        right: -20rem;
+    }
+    50% {
+        right: 2rem;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes sidebarOut {
+    0% {
+        right: 0;
+    }
+    50% {
+        right: 2rem;
+    }
+    100% {
+        right: -20rem;
+    }
+}

@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './UserMenu.module.scss';
 import icons from '../../../assets/svg/sprite.svg';
 
-const UserMenu = () => {
+const UserMenu = ({ openCloseSidebar }) => {
+    const [openSidebar, setOpenSidebar] = useState(false);
+    const menuSVG = openSidebar ? "icon-menu4" : "icon-menu3";
+
+    const onClickHandler = () => {
+        openCloseSidebar();
+        setOpenSidebar(!openSidebar);
+    }
     return(
         <div className={styles.userMenu}>
             <Link href="/">
@@ -20,13 +27,11 @@ const UserMenu = () => {
                     </svg>
                 </a>
             </Link>
-            <Link href="/">
-                <a>
+                <div onClick={onClickHandler}>
                     <svg className={styles.userMenu__icon}>
-                        <use xlinkHref={`${icons}#icon-menu3`}></use>
+                        <use xlinkHref={`${icons}#${menuSVG}`}></use>
                     </svg>
-                </a>
-            </Link>
+                </div>
         </div>
     );
 }

@@ -1,0 +1,20 @@
+@import '../../../../styles/variables.scss';
+
+.menuItem {
+    width: 100%;
+    height: 4rem;
+    border-bottom: 0.5px solid $color-darker-grey;
+    color: $color-primary;
+    font-size: 1.5rem;
+    font-family: Lato;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s;
+
+    &:hover {
+        background-color: $color-pale-grey;
+    }
+}
