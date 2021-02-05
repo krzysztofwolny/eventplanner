@@ -56,3 +56,10 @@ const getUserDocument = async uid => {
     console.error("Error fetching user", error);
   }
 };
+
+export const saveToFirebase = async (collection, inputData) => {
+    await firestore.collection(collection).doc()
+      .set(inputData)
+      .then(() => console.log("succses"))
+      .catch((error) => console.log(error));
+};

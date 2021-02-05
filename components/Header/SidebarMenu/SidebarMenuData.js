@@ -7,6 +7,10 @@ const sidebarMenuData = [
         label: "My profile",
         link: "/UserHome",
     },
+    {
+        label: "New Add",
+        link: "/NewAdd",
+    },
 ];
 
 export default sidebarMenuData;

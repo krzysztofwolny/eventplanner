@@ -34,8 +34,8 @@ const Header = () => {
             <section className={styles.header}>
                 <Logo />
                 <div>{signUpOrMenu}</div>
-            </section>
-            {displaySidebar}
+                {displaySidebar}
+            </section>  
         </React.Fragment>
     );
 }

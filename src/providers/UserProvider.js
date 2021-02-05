@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import React, { Component, createContext, useState, useEffect } from 'react';
 import { auth, generateUserDocument } from '../firebase';
 
 export const UserContext = createContext({ user: null });
@@ -24,4 +24,26 @@ class UserProvider extends Component {
       );
     }
   }
+  
+/*
+ const UserProvider = (props) => {
+  const [ProviderContext, setProviderContext] = useState({
+    user: null
+  });
+
+useEffect(() => {
+    auth.onAuthStateChanged( userAuth => {
+    const user = generateUserDocument(userAuth);
+    setProviderContext({ user });
+  });
+}, [ProviderContext.user]);
+
+  return(
+    <UserContext.Provider value={ProviderContext.user}>
+        {props.children}
+      </UserContext.Provider>
+  );
+}
+*/
+
   export default UserProvider;

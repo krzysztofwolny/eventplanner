@@ -65,7 +65,7 @@ const SignIn = () => {
               onChange = {(event) => onChangeHandler(event)}
             />
             <Button 
-              clickAction={(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}
+              clickAction={(event) => signInWithEmailAndPasswordHandler(event, email, password)}
             >
               Sign in
             </Button>
