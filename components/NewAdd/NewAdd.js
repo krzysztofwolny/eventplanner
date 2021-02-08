@@ -9,7 +9,10 @@ const NewAdd = ({user}) => {
     const [desc, setDesc] = useState("");
     const [timeFrom, setTimeFrom] = useState("");
     const [timeTo, setTimeTo] = useState("");
-    const [errorWithTime, setErrorWithTime] = useState(false)
+    const [errorWithTime, setErrorWithTime] = useState(false);
+    const [savingSucces, setSavingSucces] = useState(0)
+
+
     const saveAddToDatabase = () => {
         event.preventDefault();
 
@@ -28,23 +31,45 @@ const NewAdd = ({user}) => {
                                         destructureTimeTo[0],
                                         destructureTimeTo[1]);
         if(destructureTimeFrom[0] > destructureTimeTo[0]) {
-            console.log('zła godzina!');
             setErrorWithTime(true);
         } else {
             setErrorWithTime(false);
+            const yes = () => {
+                setSavingSucces(1)
+            };
+            const no = () => {
+                setSavingSucces(2)
+            };
             saveToFirebase("adds", {
                 user: user.uid,
                 title: title,
                 desc: desc,
                 date: date,
                 timestampFrom: timestampFrom,
-                timestampTo: timestampTo,
-
-            })
+                timestampTo: timestampTo
+            }, yes, no);
+            setTimeout(() => {
+                setSavingSucces(0);
+                setTitle("");
+                setDate("");
+                setDesc("");
+                setTimeFrom("");
+                setTimeTo("");
+                setErrorWithTime(false);
+                document.getElementById('newAdd').reset();
+            }, 5000);
         }
     };
 
-    console.log(errorWithTime);
+    const displayUserSavingInfo = () => {
+        if(savingSucces === 0) {
+            return null
+        } else if (savingSucces === 1) {
+            return "your add was succesfuly saved!"
+        } else if (savingSucces === 2) {
+            return "your add was not saved, try again."
+        }
+    };
 
     const saveValueToState = (event) => {
         const {name, value} = event.currentTarget;
@@ -68,7 +93,7 @@ const NewAdd = ({user}) => {
         } else {
             return(
                 <React.Fragment>
-                    <form className={styles.form__form}>
+                    <form className={styles.form__form} id="newAdd">
                         <label className={styles.form__inputLabel}>Title or short description</label>
                         <input 
                             className={styles.form__input}
@@ -125,6 +150,7 @@ const NewAdd = ({user}) => {
                             clickAction={() => saveAddToDatabase()}
                         >Ad your add :)</Button>
                     </form>
+                    <p className={styles.form__successMessage}>{displayUserSavingInfo()}</p>
                 </React.Fragment>
             );
         }

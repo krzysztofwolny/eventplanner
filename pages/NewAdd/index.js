@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../src/providers/UserProvider';
 import Header from '../../components/Header/Header';
 import NewAdd from '../../components/NewAdd/NewAdd';
+import YourAdds from '../../components/YourAdds/YourAdds';
 
 const NewAddPage = () => {
     const user = useContext(UserContext);
@@ -10,6 +11,7 @@ const NewAddPage = () => {
         <div className="container">
             <Header />
             <NewAdd user={user} />
+            <YourAdds user={user} />
         </div>
     );
 }

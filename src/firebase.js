@@ -57,9 +57,15 @@ const getUserDocument = async uid => {
   }
 };
 
-export const saveToFirebase = async (collection, inputData) => {
+export const saveToFirebase = async (collection, inputData, successFunc, failFunc) => {
     await firestore.collection(collection).doc()
       .set(inputData)
-      .then(() => console.log("succses"))
-      .catch((error) => console.log(error));
+      .then(() => {
+        console.log("succes");
+        successFunc();
+      })
+      .catch((error) => {
+        console.log(error);
+        failFunc();
+      });
 };
