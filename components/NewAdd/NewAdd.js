@@ -3,7 +3,7 @@ import styles from './NewAdd.module.scss';
 import Button from '../../UIelements/Button/Button';
 import { saveToFirebase } from '../../src/firebase';
 
-const NewAdd = ({user}) => {
+const NewAdd = ({user, refresh}) => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [desc, setDesc] = useState("");
@@ -57,6 +57,7 @@ const NewAdd = ({user}) => {
                 setTimeTo("");
                 setErrorWithTime(false);
                 document.getElementById('newAdd').reset();
+                refresh();
             }, 5000);
         }
     };

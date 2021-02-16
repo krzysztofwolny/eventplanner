@@ -69,3 +69,21 @@ export const saveToFirebase = async (collection, inputData, successFunc, failFun
         failFunc();
       });
 };
+
+export const searchFirebase = async (collection, searchKey, search ) => {
+  const dataOutput = [];
+  await firestore.collection(collection).where(searchKey, "==", search)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const outputObject = { docID: doc.id,
+        ...data }
+        dataOutput.push(outputObject);
+      });
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+    });
+    return dataOutput;
+};

@@ -13,8 +13,7 @@ const SidebarMenu = ({ willUnmount }) => {
                             link={el.link}  
                             key={el.label} />
             );
-        }
-        );
+        });
         return items;
     };
     
