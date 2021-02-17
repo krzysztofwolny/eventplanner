@@ -1,11 +1,11 @@
-import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
-import React, { Children } from 'react';
+import React from 'react';
 import styles from './Button.module.scss';
 
-const Button = ({ clickAction, buttonType, children }) => {
+const Button = ({ clickAction, buttonType, children, isScalable }) => {
+    const scalable = isScalable ? styles.button__small : null;
     return(
         <button
-            className={`${styles.button} ${styles[buttonType]}`} 
+            className={`${styles.button} ${styles[buttonType]} ${scalable}`} 
             onClick={clickAction}>{children}</button>
     );
 }

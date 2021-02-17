@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './YourAdds.module.scss';
-import Spinner from '../../UIelements/Spinner/Spinner';
 import ShowAddItem from './ShowAddItem/ShowAddItem';
 
-const YourAdds = ({userAdds}) => {
-    const [showSpinner, setShowSpinner] = useState(false);
-
-    console.log(userAdds);
+const YourAdds = ({userAdds, deleteItemHandler}) => {
 
     const copyUserAdds = userAdds ? [...userAdds] : [];
 
@@ -18,9 +14,10 @@ const YourAdds = ({userAdds}) => {
                                 to={el.timestampTo.seconds}
                                 title={el.title}
                                 desc={el.desc}
-                                who={el.user}
+                                who={el.userName}
                                 key={el.docID}
                                 docID={el.docID}
+                                deleteItem={(docID) => deleteItemHandler(docID)}
                     />
             );
         });

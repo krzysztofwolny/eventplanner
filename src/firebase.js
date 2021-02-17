@@ -87,3 +87,12 @@ export const searchFirebase = async (collection, searchKey, search ) => {
     });
     return dataOutput;
 };
+
+export const deleteItemFromFirebase = async (collection, itemID) => {
+  await firestore.collection(collection).doc(itemID).delete()
+  .then(() => {
+    console.log("Document successfully deleted!");
+  }).catch((error) => {
+    console.error("Error removing document: ", error);
+  });
+};

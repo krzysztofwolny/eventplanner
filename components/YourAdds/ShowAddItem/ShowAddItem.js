@@ -1,8 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ShowAddItem.module.scss';
+import Button from '../../../UIelements/Button/Button';
+import DeleteConfirmationModal from './ConfirmationModal/DeleteConfirmationModal';
 
-const ShowAddItem = ({ date, desc, from, to, title, who, docID }) => {
-    console.log("key", docID);
+const ShowAddItem = ({ date, desc, from, to, title, who, docID, deleteItem }) => {
+    const [showModal, setShowModal] = useState(false);
+
+    const confirmDelete = () => {
+        deleteItem(docID);
+        setShowModal(false);
+    };
+    
+    const deleteModule = () => {
+        if(showModal) {
+            return(
+                <DeleteConfirmationModal deletefunc={() => confirmDelete(docID)} 
+                                         refusefunc={() => setShowModal(false)} />
+            );
+        } else if (!showModal) {
+            return(
+                <p>
+                    <Button buttonType="button__google"
+                           clickAction={() => setShowModal(true)}
+                           isScalable>
+                        Delete
+                    </Button>
+                </p>
+            );
+        }
+    };
+
     return(
         <li className={styles.showAddItem}>
             <div className={styles.displayFlex + " " + styles.showAddItem__date}>
@@ -22,6 +49,9 @@ const ShowAddItem = ({ date, desc, from, to, title, who, docID }) => {
             </div>
             <div className={styles.displayFlex + " " + styles.showAddItem__who}>
                 <p>{who}</p>
+            </div>
+            <div className={styles.displayFlex + " " + styles.showAddItem__delete}>
+                {deleteModule()}
             </div>
         </li>
     );

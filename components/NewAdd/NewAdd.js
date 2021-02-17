@@ -46,7 +46,8 @@ const NewAdd = ({user, refresh}) => {
                 desc: desc,
                 date: date,
                 timestampFrom: timestampFrom,
-                timestampTo: timestampTo
+                timestampTo: timestampTo,
+                userName: user.displayName
             }, yes, no);
             setTimeout(() => {
                 setSavingSucces(0);

@@ -1,0 +1,36 @@
+@import '../../../../styles/variables.scss';
+
+.deleteModal {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    &__label {
+        text-align: center;
+        color: $color-google-red;
+        width: 80%;
+    }
+
+    &__button {
+        color: $color-google-red;
+        height: 2.5rem;
+        border: 1px solid $color-google-red;
+        border-radius: 1rem;
+        background-color: white;
+        transition: all .4s;
+
+        @media only screen and (max-width: $bp-medium) {
+            font-size: 1rem;
+            width: 80%;
+            height: 3rem;
+        }
+
+        &:hover {
+            background-color: $color-google-red;
+            color: white;
+        }
+    }
+}
