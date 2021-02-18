@@ -5,6 +5,7 @@ import NewAdd from '../../components/NewAdd/NewAdd';
 import YourAdds from '../../components/YourAdds/YourAdds';
 
 import { searchFirebase, deleteItemFromFirebase } from '../../src/firebase';
+import { sortAddsByDate } from '../../customHooks/sortObjects';
 
 const NewAddPage = () => {
     const user = useContext(UserContext);
@@ -12,7 +13,8 @@ const NewAddPage = () => {
 
     const fetchAdds = async () => {
         const fetchAdds = await searchFirebase("adds", "user", user.uid);
-            setAdds(fetchAdds);
+        const transformed = sortAddsByDate(fetchAdds);
+        setAdds(transformed);
     };
 
     console.log("adds data", adds);

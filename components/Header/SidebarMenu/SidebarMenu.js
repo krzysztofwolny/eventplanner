@@ -3,6 +3,8 @@ import styles from './SidebarMenu.module.scss';
 import sidebarMenuData from './SidebarMenuData';
 import MenuItem from './MenuItem/MenuItem';
 import logo from '../../../assets/img/logo.png'
+import { auth } from '../../../src/firebase';
+import Router from 'next/router';
 
 const SidebarMenu = ({ willUnmount }) => {
 
@@ -16,6 +18,11 @@ const SidebarMenu = ({ willUnmount }) => {
         });
         return items;
     };
+
+    const signOutHandler = () => {
+        Router.push("/");
+        auth.signOut();
+    };
     
     const sidebarStyle = willUnmount ? styles.sidebar + " " + styles.sidebar__out : styles.sidebar  + " " + styles.sidebar__in
 
@@ -24,7 +31,10 @@ const SidebarMenu = ({ willUnmount }) => {
             <ul>
                 {displayMenuItems()}
             </ul>
-            <img className={styles.sidebar__logo} src={logo} alt="EventPlannerLogo" />
+            <div className={styles.sidebar__footer}>
+                <button className={styles.sidebar__signOut} onClick={() => signOutHandler()}>Sign Out</button>
+                <img className={styles.sidebar__logo} src={logo} alt="EventPlannerLogo" />
+            </div>
         </nav>
     );
 };

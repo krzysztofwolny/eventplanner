@@ -2,7 +2,7 @@
 @import '../../../styles/animations.scss';
 
 .sidebar {
-    background-color: white;
+    background-color: $color-white-noglass;
     width: 20rem;
     height: calc(100vh - 8rem);
     box-shadow: 10px 10px 10px 10px $color-darker-grey;
@@ -14,15 +14,43 @@
     justify-content: space-between;
 
     &__in {
-        animation: sidebarEnter .5s ease-out;
+        animation: sidebarEnter .6s ease-out;
     }
 
     &__out {
-        animation: sidebarOut .5s ease-out; 
+        animation: sidebarOut .6s ease-out; 
     }
 
     &__logo {
         margin: 2rem auto;
         width: 55%;
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__signOut {
+        color: $color-primary;
+        background-color: white;
+        height: 3rem;
+        border-radius: .5rem;
+        width: 50%;
+        border: 1px solid $color-primary;
+        transition: all .3s;
+
+        &:hover {
+            background-color: $color-darker-grey-2;
+        }
+    }
+}
+
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+    .sidebar {
+      background-color: $color-white-noglass;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
     }
 }

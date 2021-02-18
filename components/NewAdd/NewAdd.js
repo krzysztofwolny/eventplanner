@@ -10,16 +10,18 @@ const NewAdd = ({user, refresh}) => {
     const [timeFrom, setTimeFrom] = useState("");
     const [timeTo, setTimeTo] = useState("");
     const [errorWithTime, setErrorWithTime] = useState(false);
-    const [savingSucces, setSavingSucces] = useState(0)
-
+    const [savingSucces, setSavingSucces] = useState(0);
 
     const saveAddToDatabase = () => {
         event.preventDefault();
 
-        const destructureDate = date.split("-");
-        const destructureTimeFrom = timeFrom.split(":");
-        const destructureTimeTo = timeTo.split(":");
+        const toNumbers = arr => arr.map(Number);
 
+        const destructureDate = toNumbers(date.split("-"));
+        const destructureTimeFrom = toNumbers(timeFrom.split(":"));
+        const destructureTimeTo = toNumbers(timeTo.split(":"));
+        destructureDate[1] = destructureDate[1] - 1;
+        console.log("destructured date", destructureDate)
         const timestampFrom = new Date( destructureDate[0], 
                                         destructureDate[1], 
                                         destructureDate[2], 

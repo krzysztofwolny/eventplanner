@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .header {
-    background-color: $color-primary-second;
+    background-color: $color-primary-second-noglass;
     width: 100%;
     height: 8rem;
     position: fixed;
@@ -9,8 +9,18 @@
     left: 0;
     box-shadow: 1px 1px 10px -1px $color-primary-fourth;
 
+
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+}
+
+@supports ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
+    .header {
+      background-color: $color-primary-second-glass;
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
 }
