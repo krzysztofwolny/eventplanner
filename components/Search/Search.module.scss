@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+@import '../../styles/animations.scss';
+
+.search {
+    color: white;
+    font-family: Lato;
+    text-align: center;
+    width: 100%;
+    height: 60rem;
+    margin-top: 8rem;
+
+    background: linear-gradient(226deg,$color-primary, $color-primary-third, $color-primary-fourth);
+    background-size: 350% 300%;
+
+    animation: search-bg 20s ease infinite;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    &__h1 {
+        font-size: 5rem;
+        font-weight: 100;
+    }
+    &__h2 {
+        font-size: 3rem;
+        font-weight: 100;
+    }
+}

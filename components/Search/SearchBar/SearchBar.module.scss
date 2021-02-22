@@ -1,0 +1,54 @@
+@import '../../../styles/variables.scss';
+
+
+.searchBar {
+    background-color: white;
+    width: 60%;
+    height: 5rem;
+    border-radius: 6rem;
+    box-shadow: 5px 8px 10px 1px $color-darker-grey;
+    overflow: hidden;
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__inputText {
+        width: 40%;
+        height: 100%;
+        margin-left: 2rem;
+        color: $color-darker-grey-3;
+        border: none;
+        &:focus {
+            outline: none;
+        }
+    }
+    &__inputDate {
+        width: 35%;
+        height: 100%;
+        padding-left: 2rem;
+        color: $color-darker-grey-3;
+        border: none;
+        border-left: 1px solid $color-darker-grey;
+    }
+    &__buttonSearch {
+        width: 25%;
+        height: 100%;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &_icon {
+            width: 4rem;
+            height: 4rem;
+            transition: all .2s;
+
+            &:hover {
+                fill: $color-primary;
+            }
+        }
+    }
+}
