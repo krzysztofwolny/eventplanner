@@ -17,8 +17,6 @@ const SearchBar = ({searchFor}) => {
         }
     };
 
-    console.log(searchText, searchDate);
-
     return(
         <form className={styles.searchBar}>
             <input className={styles.searchBar__inputText}

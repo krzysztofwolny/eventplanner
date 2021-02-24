@@ -21,7 +21,6 @@ const NewAdd = ({user, refresh}) => {
         const destructureTimeFrom = toNumbers(timeFrom.split(":"));
         const destructureTimeTo = toNumbers(timeTo.split(":"));
         destructureDate[1] = destructureDate[1] - 1;
-        console.log("destructured date", destructureDate)
         const timestampFrom = new Date( destructureDate[0], 
                                         destructureDate[1], 
                                         destructureDate[2], 

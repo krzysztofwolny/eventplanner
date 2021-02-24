@@ -8,7 +8,7 @@ const MainPage = () => {
     return(
         <div className="container">
             <Header />
-            <Search />
+            <Search mainPageStyle={true} />
         </div>
     );
 }

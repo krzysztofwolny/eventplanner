@@ -12,6 +12,5 @@ export const sortAddsByDate = (input) => {
             }
         });
     });
-    console.log("timestamps", timestampsArray);
     return outputArray;
 };

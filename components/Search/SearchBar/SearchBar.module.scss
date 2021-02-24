@@ -6,13 +6,17 @@
     width: 60%;
     height: 5rem;
     border-radius: 6rem;
-    box-shadow: 5px 8px 10px 1px $color-darker-grey;
+    box-shadow: 5px 8px 10px 1px $color-white-glass;
     overflow: hidden;
 
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+        width: 95%;
+    }
 
     &__inputText {
         width: 40%;

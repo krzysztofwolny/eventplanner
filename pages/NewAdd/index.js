@@ -17,8 +17,6 @@ const NewAddPage = () => {
         setAdds(transformed);
     };
 
-    console.log("adds data", adds);
-
     useEffect(async () => {
         if(user) {
             fetchAdds();

@@ -17,6 +17,15 @@
         margin-top: 8rem;
     }
 
+    &__smallLabel {
+        color: $color-primary;
+        margin: 3rem;
+        margin-top: -2rem;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 200;
+    }
+
     &__mainLabel {
         color: $color-primary;
         margin: 3rem;

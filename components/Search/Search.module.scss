@@ -19,6 +19,10 @@
     justify-content: space-around;
     align-items: center;
 
+    &__componentStyle {
+        height: 12rem;
+    }
+
     &__h1 {
         font-size: 5rem;
         font-weight: 100;
