@@ -8,8 +8,12 @@ const sidebarMenuData = [
         link: "/UserHome",
     },
     {
-        label: "New Add",
+        label: "New add",
         link: "/NewAdd",
+    },
+    {
+        label: "My events",
+        link: "/MyEvents",
     },
 ];
 
