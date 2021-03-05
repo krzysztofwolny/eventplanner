@@ -27,10 +27,14 @@ const ShowEvent = ({ads, events}) => {
         }
     };
 
-    console.log("current event", currentEvent);
-
-    return(
-        <div className={styles.showEvent}>
+    const printContent = () => {
+        if(events.length === 0) {
+            return(
+                <p className={styles.showEvent__eventDesc}>You have no events. Create new!</p>
+            );
+        } else {
+            return(
+                <div className={styles.showEvent}>
             <div className={styles.showEvent__buttons}>
                 <button className={styles.showEvent__buttons_toggle}
                         onClick={() => changeDisplayedEvent("prev", currentEvent)}>
@@ -39,7 +43,7 @@ const ShowEvent = ({ads, events}) => {
                         onClick={() => changeDisplayedEvent("next", currentEvent)}>
                     Next event</button>
             </div>
-            <p className={styles.showEvent__eventDesc}>{events[currentEvent].dateDisp}</p>
+            <p className={styles.showEvent__eventDesc}>{events[currentEvent].eventDate}</p>
             <p className={styles.showEvent__eventDesc}>{events[currentEvent].eventDesc}</p>
             <Calendar
                 toolbar={false}
@@ -54,6 +58,17 @@ const ShowEvent = ({ads, events}) => {
                 style={{heigth: 500}}
             />
         </div>
+            );
+        }
+    }
+
+    
+    console.log(events);
+
+    return(
+        <React.Fragment>
+            {printContent()}
+        </React.Fragment>
     );
 };
 

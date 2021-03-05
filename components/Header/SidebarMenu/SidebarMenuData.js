@@ -15,6 +15,10 @@ const sidebarMenuData = [
         label: "My events",
         link: "/MyEvents",
     },
+    {
+        label: "Create Event",
+        link: "/CreateEvent",
+    },
 ];
 
 export default sidebarMenuData;

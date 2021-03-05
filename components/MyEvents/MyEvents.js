@@ -1,6 +1,9 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import styles from './MyEvents.module.scss';
 import ShowEvent from './ShowEvent/ShowEvent';
+
+import { searchFirebase } from '../../src/firebase';
+import { sortEventsByDate } from '../../customHooks/sortObjects';
 
 const MyEvents = ({user}) => {
     const [signedInAds, setSignedInAds] = useState([
@@ -34,26 +37,19 @@ const MyEvents = ({user}) => {
             end: new Date(2021, 2, 25, 11, 20, 0)
           }
     ]);
-    const [events, setEvents] = useState([
-        {
-            date: new Date(2021, 2, 20, 0, 0, 0),
-            dateDisp: "20-03-2021",
-            eventDesc: 'opis eventu 1',
-            eventID: 'wefsefwregf'
-        },
-        {
-            date: new Date(2021, 2, 15, 0, 0, 0),
-            dateDisp: "15-03-2021",
-            eventDesc: 'opis eventu 2',
-            eventID: 'dfbngaahrWE43'
-        },
-        {
-            date: new Date(2021, 2, 30, 0, 0, 0),
-            dateDisp: "30-03-2021",
-            eventDesc: 'opis eventu 3',
-            eventID: 'wthsthsrthsrthrhty'
-        },
-    ]); 
+    const [events, setEvents] = useState([]); 
+
+    const fetchUserEvents = async () => {
+        const fetchEvents = await searchFirebase("events", "user", user.uid);
+        const sorted = sortEventsByDate(fetchEvents);
+        setEvents(sorted);
+    }
+
+    useEffect(async () => {
+        if(user) {
+            fetchUserEvents();
+        }
+    }, []);
 
     const printContent = () => {
         if(!user) {
@@ -61,9 +57,6 @@ const MyEvents = ({user}) => {
         } else {
             return(
                 <React.Fragment>
-                    <p>{user.uid}</p>
-                    <p>{user.displayName}</p>
-                    <p>{user.email}</p>
                     <ShowEvent ads={signedInAds} events={events} />
                 </React.Fragment>
             );
@@ -72,7 +65,7 @@ const MyEvents = ({user}) => {
 
     return(
         <div className={styles.form}>
-            <p>MyEvents</p>
+            <p className={styles.form__mainLabel}>MyEvents</p>
             {printContent()}
         </div>
     );
