@@ -66,9 +66,9 @@ const ShowEvent = ({ads, events}) => {
     console.log(events);
 
     return(
-        <React.Fragment>
+        <>
             {printContent()}
-        </React.Fragment>
+        </>
     );
 };
 

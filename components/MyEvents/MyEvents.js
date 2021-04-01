@@ -56,9 +56,9 @@ const MyEvents = ({user}) => {
             return <div>You need to be logged</div>
         } else {
             return(
-                <React.Fragment>
+                <>
                     <ShowEvent ads={signedInAds} events={events} />
-                </React.Fragment>
+                </>
             );
         }
     };

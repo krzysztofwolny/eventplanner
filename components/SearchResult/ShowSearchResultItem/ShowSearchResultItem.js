@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../YourAdds/ShowAddItem/ShowAddItem.module.scss';
 import Button from '../../../UIelements/Button/Button';
 
-const ShowSearchResultItem = ({ date, desc, from, to, title, who, docID, addItemToEvent }) => {
+const ShowSearchResultItem = ({ date, desc, from, to, title, who, whoID, docID, addItemToEvent }) => {
 
 
     const createTimeString = (timestamp) => {
@@ -37,7 +37,7 @@ const ShowSearchResultItem = ({ date, desc, from, to, title, who, docID, addItem
             </div>
             <div className={styles.displayFlex + " " + styles.showAddItem__delete}>
                     <Button buttonType="button__google"
-                           clickAction={() => console.log("click!")}
+                           clickAction={() => addItemToEvent(docID, whoID, date)}
                            isScalable>
                         Add to event
                     </Button>

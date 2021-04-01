@@ -17,14 +17,14 @@ const UserHome = () => {
             return <div>You need to be logged</div>
         } else {
             return(
-                <React.Fragment>
+                <>
                     <div>You are loged!</div>
                     <p>{user.uid}</p>
                     <p>{user.displayName}</p>
                     <p>{user.email}</p>
                     <p>{user.photoURL}</p>
                     <button onClick={() => signOutHandler()}>Sign Out</button>
-                </React.Fragment>
+                </>
             );
         }
     };

@@ -22,7 +22,14 @@ export const sortEventsByDate = input => {
         timestampsArray.push(el.eventTimestamp.seconds)
     });
     timestampsArray.sort((a, b) => a - b);
-    timestampsArray.forEach((el) => {
+    console.log(timestampsArray);
+    let uniqueTimestamps = [];
+    timestampsArray.forEach((c) => {
+        if (!uniqueTimestamps.includes(c)) {
+            uniqueTimestamps.push(c);
+    }
+    });
+    uniqueTimestamps.forEach((el) => {
         input.forEach((inputEl) => {
             if(el === inputEl.eventTimestamp.seconds) {
                 outputArray.push(inputEl);

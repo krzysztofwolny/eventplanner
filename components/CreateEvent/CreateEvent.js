@@ -71,7 +71,7 @@ const CreateEvent = ({user}) => {
             return <div className={styles.form__mainLabel}>Please log in first!</div>
         } else {
             return(
-                <React.Fragment>
+                <>
                     <form className={styles.form__form} id="newEvent">
                         <label className={styles.form__inputLabel}>Short description of Your event. (eg. "My wedding")</label>
                             <input 
@@ -100,7 +100,7 @@ const CreateEvent = ({user}) => {
                             </Button>
                     </form>
                     <p className={styles.form__successMessage}>{displayUserSavingInfo()}</p>
-                </React.Fragment>
+                </>
             );
         }
     }

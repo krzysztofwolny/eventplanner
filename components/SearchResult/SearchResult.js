@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Router from 'next/router';
 import styles from './SearchResult.module.scss';
 import ShowSearchResultItem from './ShowSearchResultItem/ShowSearchResultItem';
 
 import { searchFirebase } from '../../src/firebase';
 import { sortAddsByDate } from '../../customHooks/sortObjects';
 
-const SearchResult = ({searchForText, searchForDate}) => {
+const SearchResult = ({searchForText, searchForDate, user}) => {
 
     const [searchResult, setSearchResult] = useState([]);
 
@@ -14,8 +15,6 @@ const SearchResult = ({searchForText, searchForDate}) => {
         const transformed = sortAddsByDate(fetchSearchResult);
         setSearchResult(transformed);
     }, []);
-
-    console.log(searchResult.length);
 
     const searchInText = () => {
         //usuwamy znaki specjalne z szukanego tekstu
@@ -63,6 +62,23 @@ const SearchResult = ({searchForText, searchForDate}) => {
         return seekForWords();
     };
 
+    const addToEventHandler = (docID, whoID, date) => {
+        if(!user) {
+            return Router.push('/SignIn');
+        }
+        if(user.uid === whoID) {
+            return window.alert('This is your own add!');
+        }
+        return Router.push({
+                            pathname: '/AddToEventConfirmation',
+                            query: { 
+                                    addID: docID,
+                                    addOwnerID: whoID,
+                                    addDate: date
+            }
+        });
+    };
+
     const printSearchResult = () => {
         const toPrint = searchInText();
         if(toPrint.length === 0) {
@@ -70,7 +86,6 @@ const SearchResult = ({searchForText, searchForDate}) => {
                 <div className={styles.searchResult__failure}>Sorry, we didn't find anything :( try search something else, or on different day.</div>
             );
         } else { 
-            console.log(toPrint);
             return toPrint.map(el => {
                 return(
                     <ShowSearchResultItem 
@@ -80,10 +95,11 @@ const SearchResult = ({searchForText, searchForDate}) => {
                     title={el.title}
                     desc={el.desc}
                     who={el.userName}
+                    whoID={el.user}
                     key={el.docID}
                     docID={el.docID}
                     //ten jest źle, nie ma takiej funkcji, zrobimy, jak zrobimy tworzenie eventów
-                    addItemToEvent={(docID) => deleteItemHandler(docID)}
+                    addItemToEvent={(docID, whoID, date) => addToEventHandler(docID, whoID, date)}
                     />
                 );
             });
