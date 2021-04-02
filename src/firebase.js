@@ -96,3 +96,14 @@ export const deleteItemFromFirebase = async (collection, itemID) => {
     console.error("Error removing document: ", error);
   });
 };
+
+export const updateItemInFirebase = async (collection, itemID, inputData) => {
+  await firestore.collection(collection).doc(itemID).update({
+    ...inputData
+  })
+  .then(() => {
+    console.log("Document successfully updated!");
+  }).catch((error) => {
+    console.error("Error updating document: ", error);
+  });
+};

@@ -1,0 +1,45 @@
+@import '../../../styles/variables.scss';
+
+.avalibleEventsItem {
+    width: 60%;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border: 1px solid $color-primary-second;
+    border-radius: 1rem;
+    transition: all .3s;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:hover {
+        background-color: $color-darker-grey;
+        transform: scale(1.1);
+    }
+
+    &__not {
+        background-color: $color-darker-grey-2;
+        cursor: not-allowed;
+    }
+
+    &__text {
+
+        &_desc {
+            margin-left: 2rem;
+            color: $color-primary;
+            font-size: 1.3rem;
+        }
+
+        &_date {
+            color: $color-primary;
+            font-size: 1.3rem;
+            margin-left: 2rem
+        }
+
+        &_red {
+            color: $color-google-red;
+        }
+
+    }
+}

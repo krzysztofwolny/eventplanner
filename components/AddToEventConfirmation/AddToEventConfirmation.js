@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Router from 'next/router';
 import { searchFirebase } from '../../src/firebase';
+import Button from '../../UIelements/Button/Button';
 import styles from './AddToEventConfirmation.module.scss';
+import AvalibleEventsItem from './AvalibleEventsItem/AvalibleEventItem';
 
 const AddToEventConfirmation = ({ user, addID, addOwnerID, addDate }) => {
     const [avalibleEvents, setAvalibleEvents] = useState([]);
@@ -20,27 +23,49 @@ const AddToEventConfirmation = ({ user, addID, addOwnerID, addDate }) => {
         setAvalibleEvents(areThereEventsForThisDate);
         }
     }, []);
-    console.log(avalibleEvents)
-    /*
-    so now:
-    if avalibleEvents.length is 0, we neet to inform about that and propose to create new event
-     (push to create new event for this day)
-     if there are events for this date, we should display a list, where client can choose on witch he want to add an ad
-     when he will choose, the addID should be inserted in event connected ads
-     then in my events we should fetch all ads connected to events and push them to state with a key:
-             {
-            title: 'All Day Event very long title',
-            allDay: true,
-            start: new Date(2021, 2, 20, 12, 22, 0),
-            end: new Date(2021, 2, 20, 13, 22, 0)
-          },
 
-    after adding -> go to my events
-    */
+    const printContent = () => {
+
+        const printAvalibleEvents = () => {
+            return avalibleEvents.map( el => {
+                return(
+                    <AvalibleEventsItem key={el.docID}
+                                        eventID={el.docID} 
+                                        eventDate={el.eventDate} 
+                                        eventDesc={el.eventDesc}
+                                        addID={addID}
+                                        addOwnerID={addOwnerID}
+                                        eventObject={el} />
+                );
+            });
+        }
+
+
+        if(avalibleEvents.length === 0) {
+            return(
+                <>
+                    <p className={styles.form__mainLabel}>You don't have any events on {addDate}.</p>
+                    <p className={styles.form__smallLabel}>Do You wish to create one?</p>
+                    <div className={styles.confirmation__buttons}>
+                        <Button clickAction={() => Router.push('/CreateEvent')}>Yes</Button>
+                        <Button clickAction={() => Router.push('/')}>No</Button>
+                    </div>
+                </>
+            );
+        };
+        return(
+            <>
+                <p className={styles.form__mainLabel}>At {addDate} you have following events:</p>
+                <p className={styles.form__smallLabel}>choose one</p>
+                {printAvalibleEvents()}
+                <Button clickAction={() => Router.push('/MyEvents')}>Go to events</Button>
+            </>
+        );
+    };
+
     return(
         <div className={styles.form}>
-           <p>{addID}</p>
-           <p>{addOwnerID}</p>
+           {printContent()}
         </div>
     );
 };
