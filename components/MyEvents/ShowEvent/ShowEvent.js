@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ShowEvent.module.scss';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
 const ShowEvent = ({ads, events}) => {
+    const [adsToDisplay, setAdsToDisplay] = useState([]);
     const [currentEvent, setCurrentEvent] = useState(0);
+
+    useEffect(() => {
+        let filteredAds = [];
+        ads.map( el => {
+            if(el.forWhichEvent === events[currentEvent].docID) {
+                return filteredAds.push(el);
+            }
+        });
+        setAdsToDisplay(filteredAds);
+    }, [currentEvent]);
 
     const localizer = momentLocalizer(moment);
 
     const changeDisplayedEvent = (direction, actualEvent) => {
         const numberOfEvents = events.length;
-        console.log("leng", numberOfEvents);
         if(direction === "prev") {
             if(actualEvent === 0) {
                 setCurrentEvent(numberOfEvents - 1);
@@ -48,22 +58,19 @@ const ShowEvent = ({ads, events}) => {
             <Calendar
                 toolbar={false}
                 localizer={localizer}
-                events={ads}
+                events={adsToDisplay}
                 startAccessor="start"
                 endAccessor="end"
                 view="day"
                 onView={() => {}}
-                date={events[currentEvent].date}
+                date={new Date(events[currentEvent].eventTimestamp.seconds * 1000)}
                 onNavigate={date => {}}
                 style={{heigth: 500}}
             />
         </div>
             );
         }
-    }
-
-    
-    console.log(events);
+    };
 
     return(
         <>

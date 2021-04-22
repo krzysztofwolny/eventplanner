@@ -22,7 +22,6 @@ export const sortEventsByDate = input => {
         timestampsArray.push(el.eventTimestamp.seconds)
     });
     timestampsArray.sort((a, b) => a - b);
-    console.log(timestampsArray);
     let uniqueTimestamps = [];
     timestampsArray.forEach((c) => {
         if (!uniqueTimestamps.includes(c)) {

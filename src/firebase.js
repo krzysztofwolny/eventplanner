@@ -107,3 +107,13 @@ export const updateItemInFirebase = async (collection, itemID, inputData) => {
     console.error("Error updating document: ", error);
   });
 };
+
+export const getDocumentFromFirebase = async (collection, itemID) => {
+  let output = '';
+  await firestore.collection(collection).doc(itemID).get()
+  .then( res => {
+    output = res.data()
+  })
+  .catch( e => console.log(e));
+  return output;
+}

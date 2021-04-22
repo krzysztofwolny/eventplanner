@@ -2,48 +2,40 @@ import React, { useState, useEffect} from 'react';
 import styles from './MyEvents.module.scss';
 import ShowEvent from './ShowEvent/ShowEvent';
 
-import { searchFirebase } from '../../src/firebase';
+import { searchFirebase, getDocumentFromFirebase } from '../../src/firebase';
 import { sortEventsByDate } from '../../customHooks/sortObjects';
 
 const MyEvents = ({user}) => {
-    const [signedInAds, setSignedInAds] = useState([
-        {
-            title: 'All Day Event very long title',
-            allDay: true,
-            start: new Date(2021, 2, 20, 12, 22, 0),
-            end: new Date(2021, 2, 20, 13, 22, 0)
-          },
-          {
-            title: 'Long Event',
-            start: new Date(2021, 2, 30, 12, 22, 0),
-            end: new Date(2021, 2, 30, 13, 22, 0)
-          },
-        
-          {
-            title: 'DTS STARTS',
-            start: new Date(2021, 2, 26, 12, 22, 0),
-            end: new Date(2021, 2, 26, 13, 22, 0)
-          },
-        
-          {
-            title: 'DTS ENDS',
-            start: new Date(2021, 2, 24, 0, 0, 0),
-            end: new Date(2021, 2, 24, 0, 0, 0)
-          },
-        
-          {
-            title: 'Some Event',
-            start: new Date(2021, 2, 25, 10, 20, 0),
-            end: new Date(2021, 2, 25, 11, 20, 0)
-          }
-    ]);
+    const [signedInAds, setSignedInAds] = useState([]);
     const [events, setEvents] = useState([]); 
 
     const fetchUserEvents = async () => {
         const fetchEvents = await searchFirebase("events", "user", user.uid);
+        let adsArr = [];
+        if(fetchEvents.length > 0) {
+            fetchEvents.map( el => {
+                if(el.conectedAds.length === 0) {
+                    return
+                }
+                el.conectedAds.map( a => {
+                    getDocumentFromFirebase('adds', a)
+                    .then(res => {
+                        const fetchedEl = res;
+                        const newObj = {
+                            forWhichEvent: el.docID,
+                            title: fetchedEl.title,
+                            start: new Date(fetchedEl.timestampFrom.seconds * 1000),
+                            end: new Date(fetchedEl.timestampTo.seconds * 1000)
+                        }
+                        adsArr.push(newObj);
+                    });
+                });
+            });
+        };
         const sorted = sortEventsByDate(fetchEvents);
         setEvents(sorted);
-    }
+        setSignedInAds(adsArr);
+    };
 
     useEffect(async () => {
         if(user) {
