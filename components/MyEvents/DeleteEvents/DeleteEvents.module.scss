@@ -1,0 +1,41 @@
+@import '../../../styles/variables.scss';
+
+.deleteEvents {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+
+    &__droppableField {
+        background-color: $color-google-red;
+        color: $color-white-noglass;
+        height: 6rem;
+        font-size: 2rem;
+        width: 100%;
+        border: 1px solid $color-google-red;
+        border-radius: 1.2rem;
+        transition: all .3s;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__isHovered {
+            color: $color-google-red;
+            background-color: $color-white-noglass;
+        }
+    }
+
+    &__eventsList {
+        height: 70%;
+        overflow: scroll;
+    }
+
+    &__instr {
+        color: $color-primary;
+        margin: 3.5rem;
+        font-size: 2rem;
+        font-weight: 100;
+        text-align: center;
+    }
+}

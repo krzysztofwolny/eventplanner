@@ -45,29 +45,29 @@ const ShowEvent = ({ads, events}) => {
         } else {
             return(
                 <div className={styles.showEvent}>
-            <div className={styles.showEvent__buttons}>
-                <button className={styles.showEvent__buttons_toggle}
+                    <div className={styles.showEvent__buttons}>
+                        <button className={styles.showEvent__buttons_toggle}
                         onClick={() => changeDisplayedEvent("prev", currentEvent)}>
                             Previous event</button>
-                <button className={styles.showEvent__buttons_toggle}
+                        <button className={styles.showEvent__buttons_toggle}
                         onClick={() => changeDisplayedEvent("next", currentEvent)}>
-                    Next event</button>
-            </div>
-            <p className={styles.showEvent__eventDesc}>{events[currentEvent].eventDate}</p>
-            <p className={styles.showEvent__eventDesc}>{events[currentEvent].eventDesc}</p>
-            <Calendar
-                toolbar={false}
-                localizer={localizer}
-                events={adsToDisplay}
-                startAccessor="start"
-                endAccessor="end"
-                view="day"
-                onView={() => {}}
-                date={new Date(events[currentEvent].eventTimestamp.seconds * 1000)}
-                onNavigate={date => {}}
-                style={{heigth: 500}}
-            />
-        </div>
+                            Next event</button>
+                    </div>
+                    <p className={styles.showEvent__eventDesc}>{events[currentEvent].eventDate}</p>
+                    <p className={styles.showEvent__eventDesc}>{events[currentEvent].eventDesc}</p>
+                    <Calendar
+                        toolbar={false}
+                        localizer={localizer}
+                        events={adsToDisplay}
+                        startAccessor="start"
+                        endAccessor="end"
+                        view="day"
+                        onView={() => {}}
+                        date={new Date(events[currentEvent].eventTimestamp.seconds * 1000)}
+                        onNavigate={date => {}}
+                        style={{height: 600, width: 400}}
+                    />
+                </div>
             );
         }
     };

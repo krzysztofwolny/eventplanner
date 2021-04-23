@@ -1,0 +1,32 @@
+@import '../../../../styles/variables.scss';
+
+.deleteEventsItem {
+    width: 100%;
+    height: 6rem;
+    cursor: move;
+
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid $color-primary;
+    border-radius: 1.2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all .2s;
+
+    &__text {
+        color: $color-primary;
+        font-size: 1.5rem;
+    }
+
+    &__isUp {
+        opacity: .5;
+        border: 1px dotted $color-darker-grey-3;
+        transform: scale(0.96);
+    }
+
+    &__isUp_text {
+        color: red;
+    }
+}

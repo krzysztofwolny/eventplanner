@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import styles from './MyEvents.module.scss';
 import ShowEvent from './ShowEvent/ShowEvent';
+import DeleteEvents from './DeleteEvents/DeleteEvents';
 
 import { searchFirebase, getDocumentFromFirebase } from '../../src/firebase';
 import { sortEventsByDate } from '../../customHooks/sortObjects';
@@ -48,9 +49,10 @@ const MyEvents = ({user}) => {
             return <div>You need to be logged</div>
         } else {
             return(
-                <>
+                <div className={styles.myEvents__twoColumns}>
                     <ShowEvent ads={signedInAds} events={events} />
-                </>
+                    <DeleteEvents events={events} refresh={() => fetchUserEvents()} />
+                </div>
             );
         }
     };
