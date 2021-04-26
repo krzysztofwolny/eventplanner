@@ -23,6 +23,7 @@ const MyEvents = ({user}) => {
                     .then(res => {
                         const fetchedEl = res;
                         const newObj = {
+                            addID: a,
                             forWhichEvent: el.docID,
                             title: fetchedEl.title,
                             start: new Date(fetchedEl.timestampFrom.seconds * 1000),
@@ -36,6 +37,7 @@ const MyEvents = ({user}) => {
         const sorted = sortEventsByDate(fetchEvents);
         setEvents(sorted);
         setSignedInAds(adsArr);
+        console.log('refresh done')
     };
 
     useEffect(async () => {
@@ -50,7 +52,7 @@ const MyEvents = ({user}) => {
         } else {
             return(
                 <div className={styles.myEvents__twoColumns}>
-                    <ShowEvent ads={signedInAds} events={events} />
+                    <ShowEvent ads={signedInAds} events={events} refresh={() => fetchUserEvents()} />
                     <DeleteEvents events={events} refresh={() => fetchUserEvents()} />
                 </div>
             );

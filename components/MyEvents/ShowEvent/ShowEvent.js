@@ -4,7 +4,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
-const ShowEvent = ({ads, events}) => {
+import { updateItemInFirebase, getDocumentFromFirebase } from '../../../src/firebase';
+
+const ShowEvent = ({ads, events, refresh}) => {
     const [adsToDisplay, setAdsToDisplay] = useState([]);
     const [currentEvent, setCurrentEvent] = useState(0);
 
@@ -16,7 +18,7 @@ const ShowEvent = ({ads, events}) => {
             }
         });
         setAdsToDisplay(filteredAds);
-    }, [currentEvent]);
+    }, [currentEvent, ads]);
 
     const localizer = momentLocalizer(moment);
 
@@ -37,6 +39,22 @@ const ShowEvent = ({ads, events}) => {
         }
     };
 
+    const unsubscribeAdd = (addData) => {
+        getDocumentFromFirebase('events', addData.forWhichEvent)
+        .then( res => {
+            console.log(res);
+            let adsToFilter = [...res.conectedAds];
+            adsToFilter = adsToFilter.filter(e => e !== addData.addID);
+            const updatedEventData = { 
+                ...res,
+                conectedAds: adsToFilter
+            };
+            updateItemInFirebase('events', addData.forWhichEvent, updatedEventData);
+            refresh();
+        })
+        .catch( e => console.log(e) );
+    };
+
     const printContent = () => {
         if(events.length === 0) {
             return(
@@ -45,6 +63,7 @@ const ShowEvent = ({ads, events}) => {
         } else {
             return(
                 <div className={styles.showEvent}>
+                    <p className={styles.showEvent__eventDesc}>Click on add to usubscribe</p>
                     <div className={styles.showEvent__buttons}>
                         <button className={styles.showEvent__buttons_toggle}
                         onClick={() => changeDisplayedEvent("prev", currentEvent)}>
@@ -65,6 +84,7 @@ const ShowEvent = ({ads, events}) => {
                         onView={() => {}}
                         date={new Date(events[currentEvent].eventTimestamp.seconds * 1000)}
                         onNavigate={date => {}}
+                        onSelectEvent={ event => unsubscribeAdd(event)}
                         style={{height: 600, width: 400}}
                     />
                 </div>
